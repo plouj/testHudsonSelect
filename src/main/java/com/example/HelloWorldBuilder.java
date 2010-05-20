@@ -22,16 +22,15 @@ import java.util.ArrayList;
 
 public class HelloWorldBuilder extends Recorder {
 
-    public final String selectedOption;
+    public final ArrayList<Configurable> configurables;
 
     @DataBoundConstructor
-    public HelloWorldBuilder(String selectedOption) {
-        this.selectedOption = selectedOption;
+    public HelloWorldBuilder(ArrayList<Configurable> configurables) {
+        this.configurables = configurables;
     }
 
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
-		listener.getLogger().println("selected option=" + selectedOption);
         return true;
     }
 
@@ -83,6 +82,15 @@ public class HelloWorldBuilder extends Recorder {
 			}
 		}
     }
+
+	public static final class Configurable {
+		public String selectedOption;
+
+		@DataBoundConstructor
+		public Configurable(String selectedOption) {
+			this.selectedOption = selectedOption;
+		}
+	}
 
 	public BuildStepMonitor getRequiredMonitorService() {
 		return BuildStepMonitor.NONE;

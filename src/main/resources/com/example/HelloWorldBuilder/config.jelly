@@ -1,7 +1,16 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
 	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
-	<f:entry title="Select an option:">
-		<f:select field="selectedOption" />
-	</f:entry>
+	<f:section title="Configurables">
+		<f:entry> <!-- this empty entry is necessary for proper HTML output -->
+			<f:repeatable var="configurable" items="${instance.configurables}"
+				name="configurables">
+				<table width="100%">
+					<f:entry title="Select an option:">
+						<f:select field="selectedOption" />
+					</f:entry>
+				</table>
+			</f:repeatable>
+		</f:entry>
+	</f:section>
 </j:jelly>
