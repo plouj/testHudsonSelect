@@ -9,6 +9,11 @@
 					<f:entry title="Select an option:">
 						<f:select field="selectedOption" />
 					</f:entry>
+					<f:entry title="">
+					 	<div align="right">
+						     <f:repeatableDeleteButton />
+						 </div>
+   				       </f:entry>
 				</table>
 			</f:repeatable>
 		</f:entry>

@@ -10,7 +10,7 @@ import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Builder;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Publisher;
-import hudson.tasks.Recorder;
+import hudson.tasks.Builder;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
@@ -20,7 +20,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HelloWorldBuilder extends Recorder {
+public class HelloWorldBuilder extends Builder {
 
     public final ArrayList<Configurable> configurables;
 
@@ -40,7 +40,7 @@ public class HelloWorldBuilder extends Recorder {
     }
 
     @Extension // this marker indicates Hudson that this is an implementation of an extension point.
-    public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
+    public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
     	
 		public ArrayList<Option> globalOptions;
 
