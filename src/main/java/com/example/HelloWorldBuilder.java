@@ -42,53 +42,33 @@ public class HelloWorldBuilder extends Recorder {
     @Extension // this marker indicates Hudson that this is an implementation of an extension point.
     public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     	
-		public ArrayList<Option> globalOptions;
-
-		public ListBoxModel doFillSelectedOptionItems() {
-			ListBoxModel m = new ListBoxModel();
-			if (globalOptions != null) {
-				for (Option o : globalOptions) {
-					m.add(o.name, o.name);
-				}
-			}
-			return m;
-		}
-
         public boolean isApplicable(Class<? extends AbstractProject> aClass) { 
             return true;
         }
+
+	@Override
+	    public HelloWorldBuilder newInstance(StaplerRequest req, JSONObject formData) {
+	    HelloWorldBuilder instance = req.bindJSON(HelloWorldBuilder.class, formData);
+	    save();
+	    return instance;
+	}
 
         /**
          * This human readable name is used in the configuration screen.
          */
         public String getDisplayName() {
-            return "Test selection";
+            return "Hello World Builder";
         }
-
-        @Override
-        public boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
-			this.globalOptions = new ArrayList<Option>(req.bindJSONToList(
-					Option.class, formData.get("globalOptions")));
-			save();
-            return super.configure(req,formData);
-        }
-
-		public static final class Option {
-			public String name;
-
-			@DataBoundConstructor
-			public Option(String name) {
-				this.name = name;
-			}
-		}
     }
 
 	public static final class Configurable {
-		public String selectedOption;
+		public String optionA;
+		public String optionB;
 
 		@DataBoundConstructor
-		public Configurable(String selectedOption) {
-			this.selectedOption = selectedOption;
+		    public Configurable(String optA, String optB) {
+			this.optionA = optA;
+			this.optionB = optB;
 		}
 	}
 
